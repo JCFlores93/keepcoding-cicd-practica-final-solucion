@@ -1,0 +1,70 @@
+pipeline {
+    agent {
+        label 'terraform'
+    }
+
+    environment {
+        AWS_CREDENTIALS = credentials('aws-credentials')
+        AWS_ACCESS_KEY_ID = "${env.AWS_CREDENTIALS_USR}"
+        AWS_SECRET_ACCESS_KEY = "${env.AWS_CREDENTIALS_PSW}"
+    }
+
+    stages {
+        stage('DEV - Init') {
+            steps {
+                dir('infra') {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('DEV - Plan') {
+            steps {
+                dir('infra') {
+                    sh 'terraform plan'
+                }
+            }
+        }
+
+        stage('DEV - Apply') {
+            steps {
+                dir('infra') {
+                    sh 'terraform apply -auto-aprove'
+                }
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                dir('infra') {
+                    sh 'rm -rf .terraform'
+                }
+            }
+        }
+
+        stage('PROD - Init') {
+            steps {
+                dir('infra') {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+       stage('PROD - Plan') {
+            steps {
+                dir('infra') {
+                    sh 'terraform plan -var="env=prod"'
+                }
+            }
+        }
+
+        stage('PROD - Apply') {
+            steps {
+                dir('infra') {
+                    input message: 'Sure to deploy to PROD?', ok: 'Yes!'
+                        sh 'terraform apply -var="env=prod" -auto-approve'
+                }
+            }
+        }
+    }
+}
