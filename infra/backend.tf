@@ -6,12 +6,13 @@ terraform {
   }
   required_version = ">= 1.0.0"
   backend "s3" {
-    bucket = "bucket-for-terraform-state"
-    region = "eu-central-1"
+    bucket  = "cicd-terraform-state-keepcoding"
+    key     = "state/terraform.tfstate"
+    region  = "eu-west-3"
     encrypt = true
   }
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region = "eu-west-3"
 }

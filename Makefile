@@ -11,4 +11,4 @@ plan:
 	cd infra && terraform plan
 
 apply: plan
-	cd infra && terraform apply
+	cd infra && terraform apply -auto-approve
