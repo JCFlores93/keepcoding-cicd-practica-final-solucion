@@ -5,7 +5,7 @@ clean:
 	rm -fR infra/.terraform/modules
 
 init: clean
-	cd infra && terraform init
+	cd infra && terraform init -backend-config='key=dev/terraform.tfstate'
 
 plan:
 	cd infra && terraform plan
