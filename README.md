@@ -10,7 +10,7 @@ Una de las posibles soluciones para [la práctica final del módulo sobre CI/CD 
  * [Github Actions YAML](./ghactions.yml) para ejecutar el despliegue con terraform usando Github Actions
  * [Jenkinsfile](./Jenkinsfile.check) para ejecutar chequeos periódicos de memoria utilizada por las unidades de almacenamiento
  * [DSLs](./DSLs) necesarios para crear ambos jobs de Jenkins
- * [./Makefile] para desarrolladores
+ * [Makefile](./Makefile) para desarrolladores
 
 ## Instrucciones para desarrolladores/as
 
