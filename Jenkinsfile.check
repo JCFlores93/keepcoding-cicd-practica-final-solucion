@@ -7,7 +7,7 @@ pipeline {
         AWS_CREDENTIALS = credentials('aws-credentials')
         AWS_ACCESS_KEY_ID = "${env.AWS_CREDENTIALS_USR}"
         AWS_SECRET_ACCESS_KEY = "${env.AWS_CREDENTIALS_PSW}"
-        BUCKET_NAME_PREFIX = "acme-storage-"
+        BUCKET_NAME_PREFIX = "acme-storage"
         BUCKET_SIZE_LIMIT = 2097152
     }
 
