@@ -12,28 +12,27 @@ jobs:
     environment: dev
 
     steps:
-      - name: Checkout
+      - name: DEV Checkout
         uses: actions/checkout@v3
 
-      - name: Configure credentials
+      - name: DEV Configure credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-3
 
-      - name: Terraform Init
+      - name: DEV Terraform Init
         working-directory: ./infra
         run: terraform init -backend-config="key=dev/terraform.tfstate"
 
-      - name: Terraform Plan
+      - name: DEV Terraform Plan
         working-directory: ./infra
         run: terraform plan
 
-      - name: Terraform Apply
+      - name: DEV Terraform Apply
         working-directory: ./infra
         run: terraform apply -var="env=dev" -auto-approve
-
 
   deploy-prod:
     name: 'PROD Deployment'
@@ -41,21 +40,24 @@ jobs:
 
     environment: prod
     steps:
-      - name: Checkout
+      - name: PROD Checkout
         uses: actions/checkout@v3
 
-      - name: Configure credentials
+      - name: PROD Configure credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-3
 
-      - name: Terraform Init
+      - name: PROD Terraform Init
+        working-directory: ./infra
         run: terraform init -backend-config="key=prod/terraform.tfstate"
 
-      - name: Terraform Plan
+      - name: PROD Terraform Plan
+        working-directory: ./infra
         run: terraform plan
 
-      - name: Terraform Apply
+      - name: PROD Terraform Apply
+        working-directory: ./infra
         run: terraform apply -var="env=prod" -auto-approve
