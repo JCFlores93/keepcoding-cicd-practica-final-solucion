@@ -29,7 +29,7 @@ pipeline {
         stage('DEV - Apply') {
             steps {
                 dir('infra') {
-                    sh 'terraform apply -auto-aprove'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }

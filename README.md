@@ -2,6 +2,11 @@
 
 Una de las posibles soluciones para [la práctica final del módulo sobre CI/CD del bootcamp DevOps de KeepCoding](https://github.com/KeepCodingCloudDevops5/keepcoding-devops-cicd-practica-final.git)
 
+## Requisitos en la isntancia de Jenkins
+ * Instancia de Jenkins con los plugins Job DSL y Docker instalados
+ * Credenciales de AWS guardadas en la propia instancia de Jenkins con el ID `aws-credentials`
+ * Configurado Docker como nube en Jenkins además del agente de terraform
+
 ## Activos del proyecto
 
  * [Proyecto de infraestructura como código](./infra) usando [terraform](https://www.terraform.io/) para el despliegue de unidades de almacenamiento en la nube
