@@ -19,7 +19,7 @@ pipeline {
         stage('DEV - Check size') {
             steps {
                 sh """
-                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-dev --recursive  --summarize | tail -1 | cut -d : -f 2) -gt ${BUCKET_SIZE_LIMIT} ]] && \
+                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-dev --recursive  --summarize | tail -1 | cut -d : -f 2 -gt ${BUCKET_SIZE_LIMIT} ]] && \
                     aws s3 rm s3://${BUCKET_NAME_PREFIX}-dev --recursive
                 """
             }
