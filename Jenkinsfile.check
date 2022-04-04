@@ -7,7 +7,7 @@ pipeline {
         AWS_CREDENTIALS = credentials('aws-credentials')
         AWS_ACCESS_KEY_ID = "${env.AWS_CREDENTIALS_USR}"
         AWS_SECRET_ACCESS_KEY = "${env.AWS_CREDENTIALS_PSW}"
-        BUCKET_NAME_PREFIX = "acme-storage"
+        BUCKET_NAME_PREFIX = "acme-storage-keepcoding"
         BUCKET_SIZE_LIMIT = 2097152
     }
 
@@ -19,7 +19,7 @@ pipeline {
         stage('DEV - Check size') {
             steps {
                 sh """
-                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-dev --recursive  --summarize | tail -1 | cut -d : -f 2 -gt ${BUCKET_SIZE_LIMIT} ]] && \
+                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-dev --recursive --summarize | tail -1 | cut -d : -f 2 -gt ${BUCKET_SIZE_LIMIT} ]] && \
                     aws s3 rm s3://${BUCKET_NAME_PREFIX}-dev --recursive
                 """
             }
@@ -29,7 +29,7 @@ pipeline {
         stage('PROD - Check size') {
             steps {
                 sh """
-                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-prod --recursive  --summarize | tail -1 | cut -d : -f 2) -gt ${BUCKET_SIZE_LIMIT} ]] && \
+                    aws s3 ls s3://${BUCKET_NAME_PREFIX}-prod --recursive --summarize | tail -1 | cut -d : -f 2) -gt ${BUCKET_SIZE_LIMIT} ]] && \
                     aws s3 rm s3://${BUCKET_NAME_PREFIX}-prod --recursive
                 """
             }
